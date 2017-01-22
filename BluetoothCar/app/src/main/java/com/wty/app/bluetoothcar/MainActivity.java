@@ -19,6 +19,10 @@ import com.wty.app.bluetoothcar.bluetooth.BluetoothChatService;
 import com.wty.app.bluetoothcar.bluetooth.DeviceListActivity;
 import com.wty.app.bluetoothcar.utils.PreferenceUtil;
 
+import com.wty.app.bluetoothcar.pokau.VerticalSeekBar;
+
+import java.security.Timestamp;
+
 import static com.wty.app.bluetoothcar.bluetooth.BluetoothChatService.DEVICE_NAME;
 import static com.wty.app.bluetoothcar.bluetooth.BluetoothChatService.MESSAGE_DEVICE_NAME;
 import static com.wty.app.bluetoothcar.bluetooth.BluetoothChatService.MESSAGE_READ;
@@ -30,6 +34,7 @@ import static com.wty.app.bluetoothcar.bluetooth.BluetoothChatService.TOAST;
 public class MainActivity extends AppCompatActivity {
 
     private ImageButton btngo,btnstop,btnleft,btnright,btnback,settings;
+    private VerticalSeekBar seekBar;
     TextView tv_setting;
 
     private static final int REQUEST_CONNECT_DEVICE = 1;
@@ -51,6 +56,15 @@ public class MainActivity extends AppCompatActivity {
         btnstop = (ImageButton) findViewById(R.id.btnstop);
         btnback = (ImageButton) findViewById(R.id.btnback);
         tv_setting = (TextView) findViewById(R.id.tv_setting);
+
+        seekBar = (VerticalSeekBar) findViewById(R.id.seekBar);
+
+        float startSpeed = 200;
+
+        seekBar.setProgress((int)((startSpeed/255)*100));
+
+        sendMessage(String.valueOf(startSpeed));             //初始速度是200
+
         initListener();
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mBluetoothAdapter == null) {
@@ -131,10 +145,10 @@ public class MainActivity extends AppCompatActivity {
 
                     case MotionEvent.ACTION_UP:
                         btngo.setBackgroundResource(R.mipmap.up);
-                        sendMessage(PreferenceUtil.getInstance().getStopCode());
+                        sendMessage(PreferenceUtil.getInstance().getBlurCode());
                         break;
                 }
-                return false;
+                return true;
             }
 
 
@@ -149,10 +163,10 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case MotionEvent.ACTION_UP:
                         btnleft.setBackgroundResource(R.mipmap.left);
-                        sendMessage(PreferenceUtil.getInstance().getStopCode());
+                        sendMessage(PreferenceUtil.getInstance().getBlurCode());
                         break;
                 }
-                return false;
+                return true;
             }
 
 
@@ -168,10 +182,10 @@ public class MainActivity extends AppCompatActivity {
 
                     case MotionEvent.ACTION_UP:
                         btnright.setBackgroundResource(R.mipmap.right);
-                        sendMessage(PreferenceUtil.getInstance().getStopCode());
+                        sendMessage(PreferenceUtil.getInstance().getBlurCode());
                         break;
                 }
-                return false;
+                return true;
             }
 
 
@@ -187,10 +201,10 @@ public class MainActivity extends AppCompatActivity {
 
                     case MotionEvent.ACTION_UP:
                         btnback.setBackgroundResource(R.mipmap.back);
-                        sendMessage(PreferenceUtil.getInstance().getStopCode());
+                        sendMessage(PreferenceUtil.getInstance().getBlurCode());
                         break;
                 }
-                return false;
+                return true;
             }
         });
 
@@ -216,6 +230,42 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(serverIntent);
             }
         });
+
+        seekBar.setOnSeekBarChangeListener(new VerticalSeekBar.OnSeekBarChangeListener() {
+            int speed = 0;
+            long lastTime = System.currentTimeMillis();
+            Handler handler = new Handler();
+            Runnable runnable = new Runnable(){
+                @Override
+                public void run() {
+                    lastTime = System.currentTimeMillis();
+                    sendMessage(String.valueOf(speed));
+                }
+            };
+            @Override
+            public void onProgressChanged(VerticalSeekBar seekBar, int progress, boolean fromUser) {
+                speed = (int) (2.55 * progress);
+                if(System.currentTimeMillis() - lastTime < 100){
+                    handler.removeCallbacks(runnable);
+                }
+                handler.postDelayed(runnable,100);
+            }
+
+            @Override
+            public void onStartTrackingTouch(VerticalSeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(VerticalSeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onrequestDisallowInterceptTouchEvent(boolean enable) {
+
+            }
+        });
     }
 
     /**
@@ -232,6 +282,7 @@ public class MainActivity extends AppCompatActivity {
         if (message.length() > 0) {
             byte[] send = message.getBytes();
             mChatService.write(send);
+            Log.d("SendMsg", message);
         }
     }
 

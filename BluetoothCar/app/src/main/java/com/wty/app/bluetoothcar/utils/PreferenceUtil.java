@@ -17,6 +17,7 @@ public class PreferenceUtil {
 	public static String UP_CODE = "up";//
 	public static String DOWN_CODE = "down";//
 	public static String STOP_CODE = "stop";//
+	public static String BLUR_CODE = "blur";//
 
 	private SharedPreferences mSharedPreferences;
 
@@ -49,25 +50,26 @@ public class PreferenceUtil {
 	}
 
 	public String getLeftCode() {
-		return mSharedPreferences.getString(LEFT_CODE,"3");
+		return mSharedPreferences.getString(LEFT_CODE,"A");
 	}
 
 	public String getRightCode() {
-		return mSharedPreferences.getString(RIGHT_CODE,"4");
+		return mSharedPreferences.getString(RIGHT_CODE,"D");
 	}
 
 	public String getUpCode() {
-		return mSharedPreferences.getString(UP_CODE,"1");
+		return mSharedPreferences.getString(UP_CODE,"W");
 	}
 
 	public String getDownCode() {
-		return mSharedPreferences.getString(DOWN_CODE,"2");
+		return mSharedPreferences.getString(DOWN_CODE,"S");
 	}
 
 	public String getStopCode() {
-		return mSharedPreferences.getString(STOP_CODE,"0");
+		return mSharedPreferences.getString(STOP_CODE,"P");
 	}
 
+	public String getBlurCode() { return mSharedPreferences.getString(BLUR_CODE,"B");}
 	/**
 	 *	功能描述:保存到sharedPreferences
 	 */
@@ -82,5 +84,4 @@ public class PreferenceUtil {
 	public void writePreferences(String key,int value){
 		mSharedPreferences.edit().putInt(key, value).commit();// 提交修改;
 	}
-
 }

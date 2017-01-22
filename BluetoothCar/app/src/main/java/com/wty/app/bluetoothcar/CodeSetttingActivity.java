@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class CodeSetttingActivity extends AppCompatActivity {
 
-    EditText et_stop,et_up,et_down,et_left,et_right;
+    EditText et_stop,et_up,et_down,et_left,et_right,et_blur;
     Button bt_submit;
 
     @Override
@@ -31,6 +31,7 @@ public class CodeSetttingActivity extends AppCompatActivity {
         et_left = (EditText) findViewById(R.id.et_left);
         et_right = (EditText) findViewById(R.id.et_right);
         et_down = (EditText) findViewById(R.id.et_back);
+        et_blur = (EditText) findViewById(R.id.et_blur);
         bt_submit = (Button) findViewById(R.id.btn_submit);
 
         et_down.setText(PreferenceUtil.getInstance().getDownCode());
@@ -38,6 +39,7 @@ public class CodeSetttingActivity extends AppCompatActivity {
         et_left.setText(PreferenceUtil.getInstance().getLeftCode());
         et_right.setText(PreferenceUtil.getInstance().getRightCode());
         et_stop.setText(PreferenceUtil.getInstance().getStopCode());
+        et_blur.setText(PreferenceUtil.getInstance().getBlurCode());
 
         bt_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,12 +58,13 @@ public class CodeSetttingActivity extends AppCompatActivity {
     /**
      * @Decription 保存编码
      **/
-    private void saveToPreference(String down,String up,String left,String right,String stop){
+    private void saveToPreference(String down,String up,String left,String right,String stop,String blur){
         PreferenceUtil.getInstance().writePreferences(PreferenceUtil.DOWN_CODE,down);
         PreferenceUtil.getInstance().writePreferences(PreferenceUtil.UP_CODE,up);
         PreferenceUtil.getInstance().writePreferences(PreferenceUtil.LEFT_CODE,left);
         PreferenceUtil.getInstance().writePreferences(PreferenceUtil.RIGHT_CODE,right);
         PreferenceUtil.getInstance().writePreferences(PreferenceUtil.STOP_CODE,stop);
+        PreferenceUtil.getInstance().writePreferences(PreferenceUtil.BLUR_CODE,blur);
     }
 
     /**
@@ -74,8 +77,9 @@ public class CodeSetttingActivity extends AppCompatActivity {
         String left = et_left.getText().toString();
         String right = et_right.getText().toString();
         String stop = et_stop.getText().toString();
+        String blur = et_blur.getText().toString();
 
-        if(TextUtils.isEmpty(down) || TextUtils.isEmpty(up) || TextUtils.isEmpty(left) || TextUtils.isEmpty(right) || TextUtils.isEmpty(stop)){
+        if(TextUtils.isEmpty(down) || TextUtils.isEmpty(up) || TextUtils.isEmpty(left) || TextUtils.isEmpty(right) || TextUtils.isEmpty(stop) || TextUtils.isEmpty(blur)){
             return "编码不能为空";
         }
 
@@ -85,12 +89,13 @@ public class CodeSetttingActivity extends AppCompatActivity {
         map.put(left,left);
         map.put(right,right);
         map.put(stop,stop);
+        map.put(blur,blur);
 
-        if(map.size()<5){
+        if(map.size()<6){
             return "编码不能相同";
         }
 
-        saveToPreference(down,up,left,right,stop);
+        saveToPreference(down,up,left,right,stop,blur);
 
         return "";
     }

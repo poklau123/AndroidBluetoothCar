@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,44 +11,12 @@
 
     <ImageButton
         android:id="@+id/btnstop"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_centerInParent="true"
         android:layout_margin="30dp"
         android:background="@mipmap/stop"
         android:padding="50dp" />
-
-    <ImageButton
-        android:id="@+id/btnleft"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_toLeftOf="@+id/btnstop"
-        android:layout_alignTop="@+id/btnstop"
-        android:background="@mipmap/left" />
-
-    <ImageButton
-        android:id="@+id/btnright"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_toRightOf="@+id/btnstop"
-        android:layout_alignTop="@+id/btnstop"
-        android:background="@mipmap/right" />
-
-    <ImageButton
-        android:id="@+id/btnback"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_below="@+id/btnstop"
-        android:layout_alignLeft="@+id/btnstop"
-        android:background="@mipmap/back" />
-
-    <ImageButton
-        android:id="@+id/btngo"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_above="@+id/btnstop"
-        android:layout_alignLeft="@+id/btnstop"
-        android:background="@mipmap/up" />
 
     <ImageButton
         android:layout_width="40dp"
@@ -55,6 +24,7 @@
         android:background="@mipmap/settings"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
         android:id="@+id/settings"/>
 
     <TextView
@@ -68,5 +38,73 @@
         android:textColor="@color/alpha_black"
         android:textSize="16sp"
         />
+
+    <ImageButton
+        android:id="@+id/btngo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@mipmap/up"
+        android:layout_above="@+id/btnright"
+        android:layout_alignLeft="@+id/btnstop"
+        android:layout_alignStart="@+id/btnstop"
+        android:layout_marginBottom="13dp" />
+
+    <ImageButton
+        android:id="@+id/btnback"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@mipmap/back"
+        android:layout_below="@+id/btnleft"
+        android:layout_alignLeft="@+id/btnstop"
+        android:layout_alignStart="@+id/btnstop"
+        android:layout_marginTop="11dp" />
+
+    <ImageButton
+        android:id="@+id/btnleft"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@mipmap/left"
+        android:layout_below="@+id/btngo"
+        android:layout_toLeftOf="@+id/btngo"
+        android:layout_toStartOf="@+id/btngo"
+        android:layout_marginRight="11dp"
+        android:layout_marginEnd="11dp" />
+
+    <ImageButton
+        android:id="@+id/btnright"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@mipmap/right"
+        android:layout_alignTop="@+id/btnstop"
+        android:layout_toRightOf="@+id/btngo"
+        android:layout_toEndOf="@+id/btngo"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp" />
+
+    <com.wty.app.bluetoothcar.pokau.VerticalSeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="5dp"
+        android:minWidth="50dp"
+        android:id="@+id/seekBar"
+    >
+    </com.wty.app.bluetoothcar.pokau.VerticalSeekBar>
+
+    <TextView
+        android:text="速度"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:minWidth="50dp"
+        android:textAlignment="center"
+        />
+
 
 </RelativeLayout>

@@ -122,6 +122,29 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnblur"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@mipmap/leave"/>
+
+        <EditText
+            android:id="@+id/et_blur"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:maxLength="1"
+            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:hint="请输入手指移开编码"/>
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/btn_submit"
         android:layout_width="fill_parent"
@@ -137,7 +160,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="说明:\n1.本页面用于设置蓝牙小车左转/右转/前进/后退/停止编码。\n2.编码只能是0-9数字或者大小写英文字母中的一个。\n3.初始值为：前进 1 后退 2 左转 3 右转 4 停止 0。\n4.编码不能相同。"
+        android:text="说明:\n1.本页面用于设置蓝牙小车左转/右转/前进/后退/停止/手指移开按键编码。\n2.编码只能是0-9数字或者大小写英文字母中的一个。\n3.初始值为：前进 W 后退 S 左转 A 右转 D 停止 P 离开按键 B。\n4.编码不能相同。"
         />
 
 </LinearLayout>
